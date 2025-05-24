@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror -I./$(LIBDIR)/
 all: $(LIB) $(NAME)
 
 $(LIB):
-	make bonus -C $(LIBDIR)
+	make -C $(LIBDIR)
 
 $(NAME): $(OBJS)
 	$(AR) $@ $^

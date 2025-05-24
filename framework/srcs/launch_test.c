@@ -17,74 +17,71 @@ int run_unittest(void *vtest)
     }
     else if (pid == 0)
     {
+        alarm(TIMEOUT);
         status = test->func();
         exit(status);
     }
+
+    wait(&status);
+    if (WIFSIGNALED(status))
+    {
+        ft_dprintf(2, "Test %s terminated by signal %d\n", test->name, WTERMSIG(status)); // debug
+        return -WTERMSIG(status);
+    }
+    else if (WIFEXITED(status))
+    {
+        // ft_dprintf(2, "Test %s exited with status %d\n", test->name, WEXITSTATUS(status));
+        return WEXITSTATUS(status);
+    }
+    return -1;
+}
+
+void log_result(const char *func_name, const char *test_name, int result)
+{
+    ft_dprintf(2, "starting test: %s , %d\n", test_name, result); // debug
+    if (result == 0)
+    {
+        // ft_printf("%s: %s " GREEN "[OK]" RESET "\n", func_name, test_name);
+        ft_putstr_fd((char *)func_name, 2);
+        ft_putstr_fd(": ", 2);
+        ft_putstr_fd((char *)test_name, 2);
+        ft_putstr_fd(" " GREEN "[OK]" RESET "\n", 2);
+    }
+    else if (result == SIGSEGV)
+    {
+        // ft_printf("%s: %s " YELLOW "[SEGV]" RESET "\n", func_name, test_name);
+        ft_printf("%s: %s " YELLOW "[SEGV]" RESET "\n", func_name, test_name);
+    }
+    else if (result == SIGBUS)
+    {
+        ft_printf("%s: %s " YELLOW "[BUS]" RESET "\n", func_name, test_name);
+    }
+    else if (result == SIGPIPE)
+    {
+        ft_printf("%s: %s " YELLOW "[PIPE]" RESET "\n", func_name, test_name);
+    }
     else
     {
-        waitpid(pid, &status, 0);
-        if (WIFEXITED(status))
-            return WEXITSTATUS(status);
-        else if (WIFSIGNALED(status))
-        {
-            int signal = WTERMSIG(status);
-            if (signal == SIGSEGV)
-                return -2; // Segmentation fault
-            else if (signal == SIGABRT)
-                return -3; // Aborted
-            else if (signal == SIGFPE)
-                return -4; // Floating point exception
-            else if (signal == SIGILL)
-                return -5; // Illegal instruction
-            else if (signal == SIGBUS)
-                return -6; // Bus error
-            else
-                return -7; // Other signal
-        }
-        else
-        {
-            return -11; // Unknown error
-        }
+        ft_printf("%s: %s " RED "[KO]" RESET "\n", func_name, test_name);
     }
 }
 
 int launch_tests(const char *func_name, t_list *l)
 {
-    int count = 0;
-    int failed = 0;
+    int success = 0;
     t_list *current = l;
     while (current)
     {
-        t_unittest *test = (t_unittest *)current->content;
-        if (!test || !test->name || !test->func)
-        {
-            current = current->next;
-            continue;
-        }
-
-        int result = run_unittest(test);
-        count++;
-
-        if (result == 0)
-        {
-            ft_putstr_fd(func_name, STDOUT_FILENO);
-            ft_putstr_fd(": ", STDOUT_FILENO);
-            ft_putstr_fd(test->name, STDOUT_FILENO);
-            ft_putstr_fd(" " GREEN "[OK]" RESET "\n", STDOUT_FILENO);
-        }
-        else
-        {
-            failed++;
-            ft_putstr_fd(func_name, STDOUT_FILENO);
-            ft_putstr_fd(": ", STDOUT_FILENO);
-            ft_putstr_fd(test->name, STDOUT_FILENO);
-            ft_putstr_fd(" " RED "[KO]" RESET "\n", STDOUT_FILENO);
-        }
+        t_unittest *test = (t_unittest *)current->data;
+        int status = run_unittest(test);
+        if (status == 0)
+            success++;
+        log_result(func_name, test->name, status);
         current = current->next;
     }
-    // 1/2 tests checked
-    printf("%d/%d tests checked\n", count - failed, count);
-
+    ft_printf("%d/%d tests checked\n", success, ft_lstsize(l));
     clean_tests(&l);
-    return 0;
+    if (success == ft_lstsize(l))
+        return 0;
+    return -1;
 }

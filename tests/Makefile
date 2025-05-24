@@ -26,7 +26,7 @@ CFLAGS = -Wall -Wextra -Werror \
 all: $(LIB) $(FRAME) $(NAME)
 
 $(LIB):
-	make bonus -C $(LIBDIR)
+	make -C $(LIBDIR)
 $(FRAME):
 	make -C $(FRAMEDIR)
 
