@@ -31,7 +31,7 @@ $(FRAME):
 	make -C $(FRAMEDIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIB) $(FRAME)
+	$(CC) $(CFLAGS) -o $@ $^ $(FRAME) $(LIB)
 	
 %.o: %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
