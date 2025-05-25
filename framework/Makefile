@@ -1,7 +1,9 @@
 SRCS = srcs/clean_test.c \
        srcs/load_test.c \
        srcs/launch_test.c \
-       srcs/util.c
+       srcs/util.c \
+	   srcs/assert_output.c \
+	   srcs/run_unittest.c 
 
 NAME = libunit.a
 LIBDIR = ../libft

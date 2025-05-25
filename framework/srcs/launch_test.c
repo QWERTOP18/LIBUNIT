@@ -6,38 +6,11 @@
 /*   By: izen <izen@student.42tokyo.jp>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 14:54:23 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/05/25 19:40:11 by izen             ###   ########.fr       */
+/*   Updated: 2025/05/25 20:22:32 by izen             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libunit.h"
-
-int	run_unittest(void *vtest)
-{
-	t_unittest	*test;
-	pid_t		pid;
-	int			status;
-
-	test = (t_unittest *)vtest;
-	if (!test || !test->func)
-		return (-1);
-	pid = fork();
-	if (pid < 0)
-	{
-		return (-1);
-	}
-	else if (pid == 0)
-	{
-		alarm(TIMEOUT);
-		exit(test->func());
-	}
-	wait(&status);
-	if (WIFSIGNALED(status))
-		return (WTERMSIG(status));
-	else if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	return (-1);
-}
 
 char	*str_status(int status)
 {
