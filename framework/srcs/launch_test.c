@@ -18,57 +18,63 @@ int run_unittest(void *vtest)
     else if (pid == 0)
     {
         alarm(TIMEOUT);
-        status = test->func();
-        exit(status);
+        exit(test->func());
     }
 
     wait(&status);
-    if (WIFSIGNALED(status))
-    {
-        ft_dprintf(2, "Test %s terminated by signal %d\n", test->name, WTERMSIG(status)); // debug
-        return -WTERMSIG(status);
-    }
-    else if (WIFEXITED(status))
-    {
-        // ft_dprintf(2, "Test %s exited with status %d\n", test->name, WEXITSTATUS(status));
-        return WEXITSTATUS(status);
-    }
-    return -1;
+    // dprintf(2, "@@@@@@@satus %d\n", status);
+
+    // if (WIFSIGNALED(status))
+    // {
+    //     ft_dprintf(2, "Test %s terminated by signal %d\n", test->name, WTERMSIG(status)); // debug
+    //     return WTERMSIG(status);
+    // }
+    // else if (WIFEXITED(status))
+    // {
+    //     // ft_dprintf(2, "Test %s exited with status %d\n", test->name, WEXITSTATUS(status));
+    //     return WEXITSTATUS(status);
+    // }
+    return status;
+}
+
+char *str_status(int status)
+{
+    if (status == 0)
+        return GREEN "[OK]" RESET;
+    else if (status == SIGSEGV)
+        return YELLOW "[SEGV]" RESET;
+    else if (status == SIGBUS)
+        return YELLOW "[BUS]" RESET;
+    else if (status == SIGABRT)
+        return YELLOW "[ABRT]" RESET;
+    else if (status == SIGFPE)
+        return YELLOW "[FPE]" RESET;
+    else if (status == SIGILL)
+        return YELLOW "[ILL]" RESET;
+    else if (status == SIGPIPE)
+        return YELLOW "[PIPE]" RESET;
+    else if (status == SIGALRM)
+        return RED "[TIMEOUT]" RESET;
+    else
+        return RED "[KO]" RESET;
 }
 
 void log_result(const char *func_name, const char *test_name, int result)
 {
-    ft_dprintf(2, "starting test: %s , %d\n", test_name, result); // debug
-    if (result == 0)
-    {
-        // ft_printf("%s: %s " GREEN "[OK]" RESET "\n", func_name, test_name);
-        ft_putstr_fd((char *)func_name, 2);
-        ft_putstr_fd(": ", 2);
-        ft_putstr_fd((char *)test_name, 2);
-        ft_putstr_fd(" " GREEN "[OK]" RESET "\n", 2);
-    }
-    else if (result == SIGSEGV)
-    {
-        // ft_printf("%s: %s " YELLOW "[SEGV]" RESET "\n", func_name, test_name);
-        ft_printf("%s: %s " YELLOW "[SEGV]" RESET "\n", func_name, test_name);
-    }
-    else if (result == SIGBUS)
-    {
-        ft_printf("%s: %s " YELLOW "[BUS]" RESET "\n", func_name, test_name);
-    }
-    else if (result == SIGPIPE)
-    {
-        ft_printf("%s: %s " YELLOW "[PIPE]" RESET "\n", func_name, test_name);
-    }
-    else
-    {
-        ft_printf("%s: %s " RED "[KO]" RESET "\n", func_name, test_name);
-    }
+    // dprintf(2, "@@@@@@@satus %d\n", result);
+    dprintf(2, "starting test: %s , %d\n", test_name, result); // debug
+
+    ft_putstr_fd((char *)func_name, 1);
+    ft_putstr_fd(": ", 1);
+    ft_putstr_fd((char *)test_name, 1);
+    ft_putstr_fd(" ", 1);
+    ft_putendl_fd(str_status(result), 1);
 }
 
 int launch_tests(const char *func_name, t_list *l)
 {
     int success = 0;
+    int lsize = ft_lstsize(l);
     t_list *current = l;
     while (current)
     {
@@ -79,9 +85,9 @@ int launch_tests(const char *func_name, t_list *l)
         log_result(func_name, test->name, status);
         current = current->next;
     }
-    ft_printf("%d/%d tests checked\n", success, ft_lstsize(l));
+    ft_printf("%d/%d tests checked\n", success, lsize);
     clean_tests(&l);
-    if (success == ft_lstsize(l))
+    if (success == lsize)
         return 0;
     return -1;
 }

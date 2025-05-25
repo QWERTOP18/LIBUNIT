@@ -2,6 +2,9 @@
 #define LIBUNIT_H
 
 #include "libft.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/types.h>
 
 #define RESET "\033[0m"
 #define RED "\033[31m"
