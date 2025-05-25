@@ -6,14 +6,14 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 17:58:55 by ymizukam          #+#    #+#             */
-/*   Updated: 2024/12/15 12:16:31 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/05/25 14:57:15 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CYCLIC_LIST_H
 # define CYCLIC_LIST_H
 
-# include "../utils/libft/libft.h"
+# include "libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 

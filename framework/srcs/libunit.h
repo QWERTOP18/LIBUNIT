@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libunit.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/25 14:54:17 by ymizukam          #+#    #+#             */
+/*   Updated: 2025/05/25 15:02:04 by ymizukam         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBUNIT_H
 # define LIBUNIT_H
 
 # include "libft.h"
 # include <signal.h>
+# include <sys/types.h>
 # include <unistd.h>
 # include <wait.h>
 
@@ -11,7 +24,7 @@
 # define GREEN "\033[32m"
 # define YELLOW "\033[33m"
 
-# define TIMEOUT 5
+# define TIMEOUT 2
 
 typedef struct s_unittest
 {

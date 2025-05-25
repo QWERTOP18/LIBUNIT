@@ -5,6 +5,11 @@ SRCS := $(addprefix example/, \
 		03_bus.c \
 		04_ok.c \
 		05_ko.c \
+		06_timeout.c \
+		07_abort.c \
+		08_fpe.c \
+		09_ill.c \
+		10_pipe.c \
 	) \
 	main.c
 

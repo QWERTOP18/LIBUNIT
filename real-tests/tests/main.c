@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   05_ko.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/25 14:55:20 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/05/25 14:55:21 by ymizukam         ###   ########.fr       */
+/*   Created: 2025/05/25 14:55:38 by ymizukam          #+#    #+#             */
+/*   Updated: 2025/05/25 14:55:39 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libunit.h"
 
-int	ko_test(void)
+int	launch_rotate(void);
+int	launch_swap(void);
+int	launch_push(void);
+int	launch_reverse_rotate(void);
+
+int	main(void)
 {
-	if (1 + 1 == 2)
-	{
-		return (-1);
-	}
-	return (0);
+	int	status;
+
+	status = 0;
+	status |= launch_rotate();
+	return (status * -1);
 }

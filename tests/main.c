@@ -1,9 +1,24 @@
-#include "libunit.h"
-int launch_example();
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/25 14:55:02 by ymizukam          #+#    #+#             */
+/*   Updated: 2025/05/25 14:55:02 by ymizukam         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int main()
+#include "libunit.h"
+
+int	launch_example(void);
+
+int	main(void)
 {
-    int status = 0;
-    status |= launch_example();
-    return status * -1;
+	int	status;
+
+	status = 0;
+	status |= launch_example();
+	return (status * -1);
 }
