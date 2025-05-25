@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_launcher.c                                      :+:      :+:    :+:   */
+/*   assert_output.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/25 14:55:05 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/05/25 19:54:29 by ymizukam         ###   ########.fr       */
+/*   Created: 2025/05/25 19:27:05 by ymizukam          #+#    #+#             */
+/*   Updated: 2025/05/25 19:59:39 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libunit.h"
 
-int	basic_p(void);
-int	empty_p(void);
-int	console_p(void);
-
-int	launch_push(void)
+int	assert_output(int fd, const char *expected)
 {
-	t_list	*testlist;
+	char	buffer[1024];
+	int		bytes_read;
+	int		result;
 
-	testlist = NULL;
-	load_test(&testlist, "Basic test", &basic_p);
-	load_test(&testlist, "Empty list", &empty_p);
-	load_test_with_output(&testlist, "Console output", &console_p, "pa\n");
-	return (launch_tests("PUSH", testlist));
+	if (fd < 0)
+		return (-1);
+	if (!expected)
+		return (0);
+	bytes_read = read(fd, buffer, sizeof(buffer) - 1);
+	if (bytes_read < 0)
+		return (-1);
+	buffer[bytes_read] = '\0';
+	result = ft_strcmp(buffer, expected);
+	if (result == 0)
+		return (0);
+	else
+		return (1);
 }

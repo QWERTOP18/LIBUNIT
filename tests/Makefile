@@ -10,6 +10,7 @@ SRCS := $(addprefix example/, \
 		08_fpe.c \
 		09_ill.c \
 		10_pipe.c \
+		11_stdout.c \
 	) \
 	main.c
 
