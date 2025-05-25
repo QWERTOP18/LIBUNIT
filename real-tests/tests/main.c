@@ -12,16 +12,18 @@
 
 #include "libunit.h"
 
-int	launch_rotate(void);
-int	launch_swap(void);
-int	launch_push(void);
-int	launch_reverse_rotate(void);
+int launch_setup(void);
+int launch_rotate(void);
+int launch_swap(void);
+int launch_push(void);
+int launch_reverse_rotate(void);
 
-int	main(void)
+int main(void)
 {
-	int	status;
+	int status;
 
 	status = 0;
+	status |= launch_setup();
 	status |= launch_swap();
 	return (status * -1);
 }

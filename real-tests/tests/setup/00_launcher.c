@@ -12,13 +12,17 @@
 
 #include "libunit.h"
 
-int	basic_test(void);
+int new_test(void);
+int insert_test(void);
+int remove_test(void);
 
-int	launch_rotate(void)
+int launch_setup(void)
 {
-	t_list	*testlist;
+	t_list *testlist;
 
 	testlist = NULL;
-	load_test(&testlist, "Basic test", &basic_test);
-	return (launch_tests("ROTATE", testlist));
+	load_test(&testlist, "New", &basic_test);
+	load_test(&testlist, "Insert", &insert_test);
+	load_test(&testlist, "Remove", &remove_test);
+	return (launch_tests("SETUP", testlist));
 }
