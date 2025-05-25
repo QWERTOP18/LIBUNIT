@@ -1,8 +1,9 @@
 #include "libunit.h"
-void launch_example();
+int launch_example();
 
 int main()
 {
-    launch_example();
-    return 0;
+    int status = 0;
+    status |= launch_example();
+    return status * -1;
 }
