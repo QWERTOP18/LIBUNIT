@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:39:14 by ymizukam          #+#    #+#             */
-/*   Updated: 2024/12/15 12:33:44 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/05/25 17:00:30 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ void	clst_clear(t_clst *lst)
 	free(lst->data);
 	free(lst);
 	lst = NULL;
+}
+
+int	clst_size(const t_clst *list)
+{
+	if (list == NULL)
+		return (0);
+	return (list->size);
 }
 
 // int	lstalloc(t_clst *list, int size, int capacity)

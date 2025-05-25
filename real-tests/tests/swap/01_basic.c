@@ -6,14 +6,14 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 14:55:08 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/05/25 15:40:05 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/05/25 17:04:45 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cyclic_list.h"
 #include "libunit.h"
 
-int	basic_test(void)
+int	basic_s(void)
 {
 	t_clst	*list_a;
 

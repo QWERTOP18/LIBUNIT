@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 17:58:55 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/05/25 15:35:36 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/05/25 17:00:42 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_clst	*clst_new(int capa);
 void	clst_clear(t_clst *list);
 void	clst_insert(t_clst *list, int element);
 void	clst_remove(t_clst *list);
+int		clst_size(const t_clst *list);
 
 /***** ***** ***** OPERATIONS ****** ***** ****/
 int		sa(t_clst *list_a);
