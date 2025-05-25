@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libunit.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: izen <izen@student.42tokyo.jp>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 14:54:17 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/05/25 18:39:45 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/05/25 19:40:14 by izen             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "libft.h"
 # include <fcntl.h>
 # include <signal.h>
+# include <stdio.h>
 # include <sys/types.h>
 # include <unistd.h>
 # include <wait.h>
-
 # define RESET "\033[0m"
 # define RED "\033[31m"
 # define GREEN "\033[32m"
@@ -36,7 +36,9 @@ typedef struct s_unittest
 void		load_test(t_list **l, const char *name, int (*func)(void));
 int			launch_tests(const char *func_name, t_list *l);
 void		clean_tests(t_list **l);
-
+int			run_unittest(void *vtest);
+char		*str_status(int status);
+char		*str_status_plain(int status);
 /*          Util          */
 void		*test_new(const char *name, int (*func)(void));
 void		test_free(void *test);
