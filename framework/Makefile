@@ -11,7 +11,7 @@ OBJS = $(SRCS:.c=.o)
 CC = cc
 RM = rm -f
 AR = ar rc
-CFLAGS = -Wall -Wextra -Werror -I./$(LIBDIR)/
+CFLAGS = -Wall -Wextra -Werror -I./$(LIBDIR)
 
 all: $(LIB) $(NAME)
 
