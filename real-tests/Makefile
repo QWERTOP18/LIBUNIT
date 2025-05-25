@@ -1,17 +1,4 @@
-SRCS := $(addprefix example/, \
-		00_launcher_example.c \
-		01_basic.c \
-		02_segv.c \
-		03_bus.c \
-		04_ok.c \
-		05_ko.c \
-		06_timeout.c \
-		07_abort.c \
-		08_fpe.c \
-		09_ill.c \
-		10_pipe.c \
-	) \
-	main.c
+SRCS := $(shell find . -name "*.c")
 
 
 NAME = test.out
@@ -26,7 +13,8 @@ RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror \
  	-I./$(LIBDIR)/ \
-	-I./$(FRAMEDIR)/srcs
+	-I./$(FRAMEDIR)/srcs \
+	-I ./srcs
 
 all: $(LIB) $(FRAME) $(NAME)
 

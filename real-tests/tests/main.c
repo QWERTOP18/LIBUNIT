@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 14:55:38 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/05/25 14:55:39 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/05/25 15:36:23 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int	main(void)
 	int	status;
 
 	status = 0;
-	status |= launch_rotate();
+	status |= launch_swap();
 	return (status * -1);
 }

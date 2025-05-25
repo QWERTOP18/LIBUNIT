@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 17:58:55 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/05/25 14:57:15 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/05/25 15:35:36 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ typedef struct s_clst
 	int	capacity;
 
 }		t_clst;
+
+int		swap(t_clst *list);
+int		rotate(t_clst *list);
+int		reverse_rotate(t_clst *list);
+int		push(t_clst *list_from, t_clst *list_to);
 
 /***** ***** ***** UTILS ****** ***** ****/
 int		nextid(const t_clst *list);

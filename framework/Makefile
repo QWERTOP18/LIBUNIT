@@ -15,6 +15,10 @@ CFLAGS = -Wall -Wextra -Werror -I./$(LIBDIR)
 
 all: $(LIB) $(NAME)
 
+
+nm: $(NAME)
+	nm -u libunit.a | sort | uniq | grep -v ft_
+
 $(LIB):
 	make -C $(LIBDIR)
 
