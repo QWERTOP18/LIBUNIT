@@ -6,7 +6,7 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 14:54:17 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/05/25 15:02:04 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/05/25 18:39:45 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBUNIT_H
 
 # include "libft.h"
+# include <fcntl.h>
 # include <signal.h>
 # include <sys/types.h>
 # include <unistd.h>

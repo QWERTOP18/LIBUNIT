@@ -6,13 +6,13 @@
 /*   By: ymizukam <ymizukam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 14:54:23 by ymizukam          #+#    #+#             */
-/*   Updated: 2025/05/25 14:54:24 by ymizukam         ###   ########.fr       */
+/*   Updated: 2025/05/25 18:53:16 by ymizukam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libunit.h"
 
-int	run_unittest(void *vtest)
+int	run_unittest(void *vtest, int fd)
 {
 	t_unittest	*test;
 	pid_t		pid;
@@ -32,6 +32,8 @@ int	run_unittest(void *vtest)
 		exit(test->func());
 	}
 	wait(&status);
+	write(fd, test->name, ft_strlen(test->name));
+	ft_putnbr_fd(status, fd);
 	if (WIFSIGNALED(status))
 		return (WTERMSIG(status));
 	else if (WIFEXITED(status))
@@ -66,7 +68,7 @@ void	log_result(const char *func_name, const char *test_name, int result)
 	ft_putstr_fd((char *)func_name, 1);
 	ft_putstr_fd(": ", 1);
 	ft_putstr_fd((char *)test_name, 1);
-	ft_putstr_fd(" ", 1);
+	ft_putstr_fd(" : ", 1);
 	ft_putendl_fd(str_status(result), 1);
 }
 
@@ -77,14 +79,19 @@ int	launch_tests(const char *func_name, t_list *l)
 	t_list		*current;
 	t_unittest	*test;
 	int			status;
+	char		*file_name;
+	int			fd;
 
 	success = 0;
 	lsize = ft_lstsize(l);
 	current = l;
+	file_name = ft_strjoin(func_name, ".log");
+	fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	free(file_name);
 	while (current)
 	{
 		test = (t_unittest *)current->data;
-		status = run_unittest(test);
+		status = run_unittest(test, fd);
 		if (status == 0)
 			success++;
 		log_result(func_name, test->name, status);
